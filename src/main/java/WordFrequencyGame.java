@@ -41,19 +41,19 @@ public class WordFrequencyGame {
     }
 
     private static String concatWordAndCount(WordFrequencyInfo wordFrequencyInfo) {
-        return wordFrequencyInfo.getValue() + SPACE_CHAR + wordFrequencyInfo.getWordCount();
+        return wordFrequencyInfo.getWord() + SPACE_CHAR + wordFrequencyInfo.getWordCount();
     }
 
     private Map<String, List<WordFrequencyInfo>> getListMap(List<WordFrequencyInfo> wordFrequencyInfoList) {
         Map<String, List<WordFrequencyInfo>> map = new HashMap<>();
         for (WordFrequencyInfo wordFrequencyInfo : wordFrequencyInfoList) {
 //       map.computeIfAbsent(input.getValue(), k -> new ArrayList<>()).add(input);
-            if (!map.containsKey(wordFrequencyInfo.getValue())) {
+            if (!map.containsKey(wordFrequencyInfo.getWord())) {
                 ArrayList arr = new ArrayList<>();
                 arr.add(wordFrequencyInfo);
-                map.put(wordFrequencyInfo.getValue(), arr);
+                map.put(wordFrequencyInfo.getWord(), arr);
             } else {
-                map.get(wordFrequencyInfo.getValue()).add(wordFrequencyInfo);
+                map.get(wordFrequencyInfo.getWord()).add(wordFrequencyInfo);
             }
         }
         return map;
