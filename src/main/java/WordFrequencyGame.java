@@ -32,12 +32,16 @@ public class WordFrequencyGame {
                         secondWord.getWordCount() - firstWord.getWordCount());
 
                 return wordFrequencyInfoList.stream()
-                        .map(wordFrequencyInfo -> wordFrequencyInfo.getValue() + SPACE_CHAR + wordFrequencyInfo.getWordCount())
+                        .map(WordFrequencyGame::concatWordAndCount)
                         .collect(Collectors.joining(NEW_LINE_DELIMITER));
             } catch (Exception e) {
                 return CALCULATE_ERROR;
             }
         }
+    }
+
+    private static String concatWordAndCount(WordFrequencyInfo wordFrequencyInfo) {
+        return wordFrequencyInfo.getValue() + SPACE_CHAR + wordFrequencyInfo.getWordCount();
     }
 
     private Map<String, List<WordFrequencyInfo>> getListMap(List<WordFrequencyInfo> wordFrequencyInfoList) {
