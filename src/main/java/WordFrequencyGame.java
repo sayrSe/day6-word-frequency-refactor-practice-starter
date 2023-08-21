@@ -1,4 +1,5 @@
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class WordFrequencyGame {
 
@@ -12,16 +13,13 @@ public class WordFrequencyGame {
         if (inputStr.split(SPACE_DELIMITER).length == 1) {
             return inputStr + " 1";
         } else {
-
             try {
                 //split the input string with 1 to n pieces of spaces
-                String[] arr = inputStr.split(SPACE_DELIMITER);
+                List<String> separatedWords = Arrays.asList(inputStr.split(SPACE_DELIMITER));
 
-                List<WordFrequencyInfo> wordFrequencyInfoList = new ArrayList<>();
-                for (String s : arr) {
-                    WordFrequencyInfo wordFrequencyInfo = new WordFrequencyInfo(s, 1);
-                    wordFrequencyInfoList.add(wordFrequencyInfo);
-                }
+                List<WordFrequencyInfo> wordFrequencyInfoList = separatedWords.stream()
+                        .map(separatedWord -> new WordFrequencyInfo(separatedWord, 1))
+                        .collect(Collectors.toList());
 
                 //get the wordFrequencyMap for the next step of sizing the same word
                 Map<String, List<WordFrequencyInfo>> wordFrequencyMap = getListMap(wordFrequencyInfoList);
@@ -43,8 +41,6 @@ public class WordFrequencyGame {
                 }
                 return joiner.toString();
             } catch (Exception e) {
-
-
                 return CALCULATE_ERROR;
             }
         }
