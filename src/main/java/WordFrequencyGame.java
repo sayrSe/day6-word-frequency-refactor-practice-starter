@@ -25,14 +25,9 @@ public class WordFrequencyGame {
     }
 
     private List<WordFrequencyInfo> getWordFrequencyInfosList(String inputStr) {
-        //split the input string with 1 to n pieces of spaces
         List<String> separatedWords = Arrays.asList(inputStr.split(SPACE_DELIMITER));
-
         List<WordFrequencyInfo> wordFrequencyInfoList = mapWordFrequencyInfos(separatedWords);
-
-        //get the wordFrequencyMap for the next step of sizing the same word
         Map<String, List<WordFrequencyInfo>> wordFrequencyMap = groupWordFrequencyInfo(wordFrequencyInfoList);
-
         wordFrequencyInfoList = mapWordFrequencyInfosWithCount(wordFrequencyMap);
 
         wordFrequencyInfoList.sort((firstWord, secondWord) -> secondWord.getWordCount() - firstWord.getWordCount());
