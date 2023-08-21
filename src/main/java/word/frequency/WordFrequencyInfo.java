@@ -1,3 +1,5 @@
+package word.frequency;
+
 public class WordFrequencyInfo {
 
     private final String word;

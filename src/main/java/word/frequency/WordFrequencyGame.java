@@ -1,3 +1,5 @@
+package word.frequency;
+
 import java.util.*;
 import java.util.stream.Collectors;
 
