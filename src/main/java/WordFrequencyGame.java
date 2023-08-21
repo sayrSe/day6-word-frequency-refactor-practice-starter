@@ -22,7 +22,7 @@ public class WordFrequencyGame {
                         .collect(Collectors.toList());
 
                 //get the wordFrequencyMap for the next step of sizing the same word
-                Map<String, List<WordFrequencyInfo>> wordFrequencyMap = getListMap(wordFrequencyInfoList);
+                Map<String, List<WordFrequencyInfo>> wordFrequencyMap = groupWordFrequencyInfo(wordFrequencyInfoList);
 
                 wordFrequencyInfoList = wordFrequencyMap.entrySet().stream()
                         .map(entry -> new WordFrequencyInfo(entry.getKey(), entry.getValue().size()))
@@ -44,18 +44,7 @@ public class WordFrequencyGame {
         return wordFrequencyInfo.getWord() + SPACE_CHAR + wordFrequencyInfo.getWordCount();
     }
 
-    private Map<String, List<WordFrequencyInfo>> getListMap(List<WordFrequencyInfo> wordFrequencyInfoList) {
-        Map<String, List<WordFrequencyInfo>> map = new HashMap<>();
-        for (WordFrequencyInfo wordFrequencyInfo : wordFrequencyInfoList) {
-//       map.computeIfAbsent(input.getValue(), k -> new ArrayList<>()).add(input);
-            if (!map.containsKey(wordFrequencyInfo.getWord())) {
-                ArrayList arr = new ArrayList<>();
-                arr.add(wordFrequencyInfo);
-                map.put(wordFrequencyInfo.getWord(), arr);
-            } else {
-                map.get(wordFrequencyInfo.getWord()).add(wordFrequencyInfo);
-            }
-        }
-        return map;
+    private Map<String, List<WordFrequencyInfo>> groupWordFrequencyInfo(List<WordFrequencyInfo> wordFrequencyInfoList) {
+        return wordFrequencyInfoList.stream().collect(Collectors.groupingBy(WordFrequencyInfo::getWord));
     }
 }
