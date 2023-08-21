@@ -25,9 +25,9 @@ public class WordFrequencyGame {
 
     private List<WordFrequencyInfo> getWordFrequencyInfosList(String inputStr) {
         List<String> separatedWords = Arrays.asList(inputStr.split(SPACE_DELIMITER));
-        List<WordFrequencyInfo> wordFrequencyInfoList = mapWordFrequencyInfos(separatedWords);
+        List<WordFrequencyInfo> wordFrequencyInfoList = mapWordFrequencyInfoList(separatedWords);
         Map<String, List<WordFrequencyInfo>> wordFrequencyMap = groupWordFrequencyInfo(wordFrequencyInfoList);
-        wordFrequencyInfoList = mapWordFrequencyInfosWithCount(wordFrequencyMap);
+        wordFrequencyInfoList = mapWordFrequencyInfoWithCountList(wordFrequencyMap);
 
         wordFrequencyInfoList.sort(WordFrequencyGame::compareWordCount);
         return wordFrequencyInfoList;
@@ -37,13 +37,13 @@ public class WordFrequencyGame {
         return secondWord.getWordCount() - firstWord.getWordCount();
     }
 
-    private static List<WordFrequencyInfo> mapWordFrequencyInfosWithCount(Map<String, List<WordFrequencyInfo>> wordFrequencyMap) {
+    private static List<WordFrequencyInfo> mapWordFrequencyInfoWithCountList(Map<String, List<WordFrequencyInfo>> wordFrequencyMap) {
         return wordFrequencyMap.entrySet().stream()
                 .map(entry -> new WordFrequencyInfo(entry.getKey(), entry.getValue().size()))
                 .collect(Collectors.toList());
     }
 
-    private static List<WordFrequencyInfo> mapWordFrequencyInfos(List<String> separatedWords) {
+    private static List<WordFrequencyInfo> mapWordFrequencyInfoList(List<String> separatedWords) {
         return separatedWords.stream()
                 .map(separatedWord -> new WordFrequencyInfo(separatedWord, 0))
                 .collect(Collectors.toList());
