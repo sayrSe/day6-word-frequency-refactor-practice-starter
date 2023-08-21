@@ -28,9 +28,7 @@ public class WordFrequencyGame {
         //split the input string with 1 to n pieces of spaces
         List<String> separatedWords = Arrays.asList(inputStr.split(SPACE_DELIMITER));
 
-        List<WordFrequencyInfo> wordFrequencyInfoList = separatedWords.stream()
-                .map(separatedWord -> new WordFrequencyInfo(separatedWord, 1))
-                .collect(Collectors.toList());
+        List<WordFrequencyInfo> wordFrequencyInfoList = mapWordsToWordFrequencyInfo(separatedWords);
 
         //get the wordFrequencyMap for the next step of sizing the same word
         Map<String, List<WordFrequencyInfo>> wordFrequencyMap = groupWordFrequencyInfo(wordFrequencyInfoList);
@@ -41,6 +39,12 @@ public class WordFrequencyGame {
 
         wordFrequencyInfoList.sort((firstWord, secondWord) -> secondWord.getWordCount() - firstWord.getWordCount());
         return wordFrequencyInfoList;
+    }
+
+    private static List<WordFrequencyInfo> mapWordsToWordFrequencyInfo(List<String> separatedWords) {
+        return separatedWords.stream()
+                .map(separatedWord -> new WordFrequencyInfo(separatedWord, 0))
+                .collect(Collectors.toList());
     }
 
     private static String concatWordAndCount(WordFrequencyInfo wordFrequencyInfo) {
