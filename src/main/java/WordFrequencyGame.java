@@ -27,8 +27,12 @@ public class WordFrequencyGame {
         Map<String, List<WordFrequencyInfo>> wordFrequencyMap = groupWordFrequencyInfo(wordFrequencyInfoList);
         wordFrequencyInfoList = mapWordFrequencyInfosWithCount(wordFrequencyMap);
 
-        wordFrequencyInfoList.sort((firstWord, secondWord) -> secondWord.getWordCount() - firstWord.getWordCount());
+        wordFrequencyInfoList.sort(WordFrequencyGame::compareWordCount);
         return wordFrequencyInfoList;
+    }
+
+    private static int compareWordCount(WordFrequencyInfo firstWord, WordFrequencyInfo secondWord) {
+        return secondWord.getWordCount() - firstWord.getWordCount();
     }
 
     private static List<WordFrequencyInfo> mapWordFrequencyInfosWithCount(Map<String, List<WordFrequencyInfo>> wordFrequencyMap) {
