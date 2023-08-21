@@ -9,27 +9,11 @@ public class WordFrequencyGame {
     public static final String CALCULATE_ERROR = "Calculate Error";
 
     public String getResult(String inputStr) {
-
         if (inputStr.split(SPACE_DELIMITER).length == 1) {
             return inputStr + " 1";
         } else {
             try {
-                //split the input string with 1 to n pieces of spaces
-                List<String> separatedWords = Arrays.asList(inputStr.split(SPACE_DELIMITER));
-
-                List<WordFrequencyInfo> wordFrequencyInfoList = separatedWords.stream()
-                        .map(separatedWord -> new WordFrequencyInfo(separatedWord, 1))
-                        .collect(Collectors.toList());
-
-                //get the wordFrequencyMap for the next step of sizing the same word
-                Map<String, List<WordFrequencyInfo>> wordFrequencyMap = groupWordFrequencyInfo(wordFrequencyInfoList);
-
-                wordFrequencyInfoList = wordFrequencyMap.entrySet().stream()
-                        .map(entry -> new WordFrequencyInfo(entry.getKey(), entry.getValue().size()))
-                        .collect(Collectors.toList());
-
-                wordFrequencyInfoList.sort((firstWord, secondWord) ->
-                        secondWord.getWordCount() - firstWord.getWordCount());
+                List<WordFrequencyInfo> wordFrequencyInfoList = getWordFrequencyInfosList(inputStr);
 
                 return wordFrequencyInfoList.stream()
                         .map(WordFrequencyGame::concatWordAndCount)
@@ -38,6 +22,25 @@ public class WordFrequencyGame {
                 return CALCULATE_ERROR;
             }
         }
+    }
+
+    private List<WordFrequencyInfo> getWordFrequencyInfosList(String inputStr) {
+        //split the input string with 1 to n pieces of spaces
+        List<String> separatedWords = Arrays.asList(inputStr.split(SPACE_DELIMITER));
+
+        List<WordFrequencyInfo> wordFrequencyInfoList = separatedWords.stream()
+                .map(separatedWord -> new WordFrequencyInfo(separatedWord, 1))
+                .collect(Collectors.toList());
+
+        //get the wordFrequencyMap for the next step of sizing the same word
+        Map<String, List<WordFrequencyInfo>> wordFrequencyMap = groupWordFrequencyInfo(wordFrequencyInfoList);
+
+        wordFrequencyInfoList = wordFrequencyMap.entrySet().stream()
+                .map(entry -> new WordFrequencyInfo(entry.getKey(), entry.getValue().size()))
+                .collect(Collectors.toList());
+
+        wordFrequencyInfoList.sort((firstWord, secondWord) -> secondWord.getWordCount() - firstWord.getWordCount());
+        return wordFrequencyInfoList;
     }
 
     private static String concatWordAndCount(WordFrequencyInfo wordFrequencyInfo) {
