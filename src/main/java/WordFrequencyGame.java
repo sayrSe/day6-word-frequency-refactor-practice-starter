@@ -14,10 +14,7 @@ public class WordFrequencyGame {
         } else {
             try {
                 List<WordFrequencyInfo> wordFrequencyInfoList = getWordFrequencyInfosList(inputStr);
-
-                return wordFrequencyInfoList.stream()
-                        .map(WordFrequencyGame::concatWordAndCount)
-                        .collect(Collectors.joining(NEW_LINE_DELIMITER));
+                return generatePrintLines(wordFrequencyInfoList);
             } catch (Exception e) {
                 return CALCULATE_ERROR;
             }
@@ -52,5 +49,11 @@ public class WordFrequencyGame {
 
     private Map<String, List<WordFrequencyInfo>> groupWordFrequencyInfo(List<WordFrequencyInfo> wordFrequencyInfoList) {
         return wordFrequencyInfoList.stream().collect(Collectors.groupingBy(WordFrequencyInfo::getWord));
+    }
+
+    private static String generatePrintLines(List<WordFrequencyInfo> wordFrequencyInfoList) {
+        return wordFrequencyInfoList.stream()
+                .map(WordFrequencyGame::concatWordAndCount)
+                .collect(Collectors.joining(NEW_LINE_DELIMITER));
     }
 }
