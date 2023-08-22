@@ -2,7 +2,7 @@ import org.junit.jupiter.api.Test;
 import word.frequency.WordFrequencyGame;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
-
+//TODO since I got the same comment can utilize the exception part
 public class WordFrequencyGameTest {
 
     @Test
