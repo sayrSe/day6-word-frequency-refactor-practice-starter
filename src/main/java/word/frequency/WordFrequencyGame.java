@@ -11,7 +11,7 @@ public class WordFrequencyGame {
     public static final String NEW_LINE_DELIMITER = "\n";
     public static final String SPACE_CHAR = " ";
     public static final String CALCULATE_ERROR = "Calculate Error";
-
+//TODO can change the name into more meaningful description and remove the if else
     public String getResult(String inputStr) {
         if (inputStr.split(SPACE_DELIMITER).length == 1) {
             return inputStr + " 1";
