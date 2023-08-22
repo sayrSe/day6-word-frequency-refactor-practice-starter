@@ -44,7 +44,7 @@ public class WordFrequencyGame {
                 .map(entry -> new WordFrequencyInfo(entry.getKey(), entry.getValue().size()))
                 .collect(Collectors.toList());
     }
-
+//TODO not entirely sure but can be counted using distinct and collections.frequency
     private static List<WordFrequencyInfo> mapWordFrequencyInfoList(List<String> separatedWords) {
         return separatedWords.stream()
                 .map(separatedWord -> new WordFrequencyInfo(separatedWord, 0))
